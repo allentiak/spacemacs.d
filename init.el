@@ -60,11 +60,14 @@ This function should only modify configuration layer settings."
 
      ;; https://develop.spacemacs.org/layers/+lang/clojure/README.html
      (clojure :variables
-              clojure-backend 'cider
-              clojure-enable-linters 'clj-kondo
-              clojure-toplevel-inside-comment-form t
               cider-overlays-use-font-lock t
-              cider-repl-buffer-size-limit 100)
+              cider-preferred-build-tool 'clojure-cli
+              cider-repl-buffer-size-limit 100
+              clojure-backend 'cider
+              clojure-enable-sayid t
+              clojure-enable-clj-refactor t
+              clojure-enable-linters '(clj-kondo joker)
+              clojure-toplevel-inside-comment-form t)
 
      ;; SPC a L displays key and command history in a separate buffer
      command-log
@@ -89,8 +92,10 @@ This function should only modify configuration layer settings."
      ;; refine hunk 'all highlights characters changed on each line
      (git :variables
           git-magit-status-fullscreen t
+          magit-diff-adjust-tab-width t
+          magit-diff-highlight-trailing t
+          magit-diff-paint-whitespace t
           magit-diff-refine-hunk 'all)
-
      ;; SPC g h to use GitHub repositories
      ;; SPC g g to use GitHub Gists
      github
@@ -117,10 +122,12 @@ This function should only modify configuration layer settings."
      ;; javascript
      json
 
+      (keyboard-layout :variables kl-layout 'colemak-neio-inverted)
+
      ;; Clojure specific configuration in dotspacemacs/user-config
      ;; lsp
 
-     markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
 
      ;; Editing multiple lines of text concurrently
      ;; `g r' menu in Emacs normal state
@@ -279,7 +286,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 10
 
    ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
    ;; This is an advanced option and should not be changed unless you suspect
@@ -335,7 +342,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner "~/.spacemacs.d/banners/practicalli-logo.svg"
+   dotspacemacs-startup-banner 'official
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -399,7 +406,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Fira Code"
+   dotspacemacs-default-font '("Roboto Mono Medium"
                                :size 16.0
                                :weight normal
                                :width normal)
